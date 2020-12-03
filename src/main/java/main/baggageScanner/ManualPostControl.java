@@ -60,9 +60,9 @@ public class ManualPostControl {
                 inspectorI3.swipeTestStripe(testStripe);
                 inspectorI3.putTestStripeIntoExplosiveTraceDetector(baggageScanner.getManualPostControl().getExplosiveTraceDetector(), testStripe);
 
-                officer2InPresence.push(officer2InPresence.getRemoteControl(), tray);
-
-                officer2InPresence.workWithRobot(tray.getHandBaggage());
+                officer2InPresence.push(officer2InPresence.getRemoteControl());
+//
+//                officer2InPresence.workWithRobot(tray.getHandBaggage());
             } else if (record.getResult().getScanResult().equals(ScanResult.weapon)){
                 //weapon
                 passengerInPresence = tray.getHandBaggage().getPassenger();
@@ -93,4 +93,5 @@ public class ManualPostControl {
     public Tray getTray() {
         return tray;
     }
+
 }

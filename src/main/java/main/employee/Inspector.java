@@ -18,9 +18,6 @@ public class Inspector extends Employee {
     private boolean isSenior;
 
     private Record record;
-    private FederalPoliceOfficer officer1;
-    private FederalPoliceOfficer officer2;
-
 
     public Inspector(int id, String name, String birthDate, boolean isSenior) {
         super(id, name, birthDate);
@@ -56,8 +53,6 @@ public class Inspector extends Employee {
         explosiveTraceDetector.checkTestStripeForExplosive(testStripe);
     }
 
-
-
     public void setAlarm(BaggageScanner baggageScanner) {
         baggageScanner.setStatus(Status.locked);
     }
@@ -82,23 +77,6 @@ public class Inspector extends Employee {
     public void putOnTrack1(BaggageScanner baggageScanner, Tray tray) {
         baggageScanner.getTrack1().putTray(tray);
     }
-
-    public FederalPoliceOfficer getOfficer1() {
-        return officer1;
-    }
-
-    public FederalPoliceOfficer getOfficer2() {
-        return officer2;
-    }
-
-    public void setOfficer1(FederalPoliceOfficer officer1) {
-        this.officer1 = officer1;
-    }
-
-    public void setOfficer2(FederalPoliceOfficer officer2) {
-        this.officer2 = officer2;
-    }
-
 
     public void tellOtherInspector(Inspector inspector, Record record){
         inspector.hearSentence(record);

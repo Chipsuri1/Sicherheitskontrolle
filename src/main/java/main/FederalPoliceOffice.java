@@ -7,18 +7,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FederalPoliceOffice {
+
+    private BaggageScanner baggageScanner;
     private FederalPoliceOfficer federalPoliceOfficerO1;
     private FederalPoliceOfficer federalPoliceOfficerO2;
     private FederalPoliceOfficer federalPoliceOfficerO3;
     private List<Robot> robots;
 
-    public FederalPoliceOffice() {
+    public FederalPoliceOffice(BaggageScanner baggageScanner) {
+        this.baggageScanner = baggageScanner;
         federalPoliceOfficerO1 = new FederalPoliceOfficer(5, "Wesley Snipes", "31.07.1962", this);
         federalPoliceOfficerO2 = new FederalPoliceOfficer(8, "Toto", "01.01.1969", this);
         federalPoliceOfficerO3 = new FederalPoliceOfficer(9, "Harry", "01.01.1969", this);
         robots = new LinkedList<>();
         for (int i = 0; i < 3; i++) {
-            robots.add(new Robot());
+            robots.add(new Robot(this));
         }
     }
 
@@ -47,5 +50,9 @@ public class FederalPoliceOffice {
 
     public List<Robot> getRobots() {
         return robots;
+    }
+
+    public BaggageScanner getBaggageScanner() {
+        return baggageScanner;
     }
 }

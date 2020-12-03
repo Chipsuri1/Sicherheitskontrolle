@@ -28,7 +28,7 @@ public class BaggageScanner {
     public BaggageScanner() {
         this.scanner = new Scanner(this);
         this.operatingStation = new OperatingStation(scanner, belt, this);
-        this.federalPoliceOffice = new FederalPoliceOffice();
+        this.federalPoliceOffice = new FederalPoliceOffice(this);
     }
 
     public void scanHandBaggage() {

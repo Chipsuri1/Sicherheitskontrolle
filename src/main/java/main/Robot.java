@@ -6,8 +6,18 @@ import main.passenger.Layer;
 
 public class Robot {
 
+    private FederalPoliceOffice federalPoliceOffice;
 
-    public void defuse(HandBaggage handBaggage) {
+    public Robot(FederalPoliceOffice federalPoliceOffice){
+        this.federalPoliceOffice = federalPoliceOffice;
+    }
+
+
+
+    public void defuse() {
+        HandBaggage handBaggage = federalPoliceOffice.getBaggageScanner().getManualPostControl().getTray().getHandBaggage();
+
+
         StringBuilder stringBuilder = new StringBuilder();
 
         for(Layer layer : handBaggage.getLayers()){

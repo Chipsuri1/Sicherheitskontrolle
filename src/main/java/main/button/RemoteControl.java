@@ -13,6 +13,6 @@ public class RemoteControl extends Button {
 
     public void buttonAction(){
         Robot robot = federalPoliceOffice.getRobots().get(Configuration.instance.mersenneTwister.nextInt(2));
-        robot.defuse(handBaggage);
+        robot.defuse();
     }
 }
