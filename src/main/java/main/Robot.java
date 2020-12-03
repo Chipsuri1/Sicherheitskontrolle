@@ -5,6 +5,8 @@ import main.passenger.HandBaggage;
 import main.passenger.Layer;
 
 public class Robot {
+
+
     public void defuse(HandBaggage handBaggage) {
         StringBuilder stringBuilder = new StringBuilder();
 
