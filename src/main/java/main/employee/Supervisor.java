@@ -24,6 +24,6 @@ public class Supervisor extends Employee {
 
 
     public void unlock(BaggageScanner baggageScanner) {
-        baggageScanner.setStatus(Status.activated);
+        baggageScanner.unlock(this);
     }
 }

@@ -4,7 +4,9 @@ import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.Record;
 import main.ScanResult;
 import main.Status;
+import main.employee.Employee;
 import main.employee.HouseKeeper;
+import main.employee.Supervisor;
 import main.employee.Technician;
 
 import static main.Status.shutdown;
@@ -57,6 +59,12 @@ public class BaggageScanner {
 //            System.out.println("Passenger "+ tray.getHandBaggage().getPassenger().getName()+ " is crispy clean!");
             //Gib Passagier Handbaggage zurück über Track 02
             track2.putTray(tray);
+        }
+    }
+
+    public void unlock(Employee employee){
+        if(getStatus().equals(Status.locked) && employee instanceof Supervisor){
+            setStatus(Status.activated);
         }
     }
 

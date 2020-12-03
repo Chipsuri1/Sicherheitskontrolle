@@ -57,4 +57,8 @@ public class SecurityControl {
     public Queue<Passenger> getPassengerList() {
         return passengerList;
     }
+
+    public BaggageScanner getBaggageScanner() {
+        return baggageScanner;
+    }
 }
