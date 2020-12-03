@@ -20,6 +20,7 @@ public abstract class Employee {
         idCard = new IDCard();
     }
 
+
     public void push(Button button){
         button.buttonAction();
     }

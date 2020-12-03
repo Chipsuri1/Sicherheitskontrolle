@@ -25,5 +25,6 @@ public class Supervisor extends Employee {
 
     public void unlock(BaggageScanner baggageScanner) {
         baggageScanner.unlock(this);
+        baggageScanner.getOperatingStation().getCardReader().setAmountOfTries(0);
     }
 }
