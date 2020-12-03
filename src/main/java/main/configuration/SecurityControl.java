@@ -54,4 +54,7 @@ public class SecurityControl {
         System.out.println();
     }
 
+    public Queue<Passenger> getPassengerList() {
+        return passengerList;
+    }
 }

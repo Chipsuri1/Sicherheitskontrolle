@@ -36,6 +36,7 @@ public class ManualPostControl {
         Record record = tray.getRecord();
         //Knife
         if (record.getResult().getScanResult().equals(ScanResult.knife)) {
+            System.out.println("knife");
             baggageScanner.getOperatingStation().getInspectorI2().tellOtherInspector(getInspectorI3(), record);
             passengerInPresence = tray.getHandBaggage().getPassenger();
             getInspectorI3().openBaggageGetKnifeAndThrowAway(tray.getHandBaggage());
@@ -48,6 +49,7 @@ public class ManualPostControl {
         }
         //Weapon or Explosive
         else if (record.getResult().getScanResult().equals(ScanResult.weapon) || record.getResult().getScanResult().equals(ScanResult.explosive)) {
+            System.out.println("weapon or eplosive");
             baggageScanner.getOperatingStation().getInspectorI2().setAlarm(baggageScanner);
             baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1().arrest(tray.getHandBaggage().getPassenger());
             FederalPoliceOfficer officer1InPresence = baggageScanner.getFederalPoliceOffice().reqestOfficer1(baggageScanner);
@@ -55,7 +57,7 @@ public class ManualPostControl {
             FederalPoliceOfficer officer3InPresence = baggageScanner.getFederalPoliceOffice().reqestOfficer3(baggageScanner);
 
             if (record.getResult().getScanResult().equals(ScanResult.explosive)) {
-
+                System.out.println("explosive");
                 TestStripe testStripe = new TestStripe();
                 inspectorI3.swipeTestStripe(testStripe);
                 inspectorI3.putTestStripeIntoExplosiveTraceDetector(baggageScanner.getManualPostControl().getExplosiveTraceDetector(), testStripe);
@@ -65,6 +67,7 @@ public class ManualPostControl {
 //                officer2InPresence.workWithRobot(tray.getHandBaggage());
             } else if (record.getResult().getScanResult().equals(ScanResult.weapon)){
                 //weapon
+                System.out.println("weapon");
                 passengerInPresence = tray.getHandBaggage().getPassenger();
                 supervisorInPresence = baggageScanner.getSupervision().getSupervisor();
                 officer1InPresence.openHandBaggageGetWeaponAndGiveToOfficer03(tray);
