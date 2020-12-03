@@ -61,6 +61,10 @@ public class SecurityControl {
         return passengerList;
     }
 
+    public BaggageScanner getBaggageScanner() {
+        return baggageScanner;
+    }
+
     public List<HandBaggage> getHandBaggages() {
         return handBaggages;
     }

@@ -90,4 +90,6 @@ public class Scanner {
     public Queue<Tray> getTrays() {
         return trays;
     }
+
+
 }

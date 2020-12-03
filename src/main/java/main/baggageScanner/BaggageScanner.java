@@ -4,7 +4,9 @@ import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.Record;
 import main.ScanResult;
 import main.Status;
+import main.employee.Employee;
 import main.employee.HouseKeeper;
+import main.employee.Supervisor;
 import main.employee.Technician;
 
 import static main.Status.shutdown;
@@ -35,12 +37,16 @@ public class BaggageScanner {
     }
 
     public void scanHandBaggage() {
-        rollerConveyor.getInspectorI1().pushHandBaggage(rollerConveyor.getTrays(), belt.getTrays());
-        operatingStation.getInspectorI2().push(operatingStation.getButtonLeft());
-        operatingStation.getInspectorI2().push(operatingStation.getButtonRectangle());
+        if(getStatus().equals(Status.activated)){
+            rollerConveyor.getInspectorI1().pushHandBaggage(rollerConveyor.getTrays(), belt.getTrays());
+            operatingStation.getInspectorI2().push(operatingStation.getButtonLeft());
+            operatingStation.getInspectorI2().push(operatingStation.getButtonRectangle());
 
-        while (scanner.getTrays().size() != 0) {
-            doNextStepAfterScanning(scanner.getTrays().poll());
+            while (scanner.getTrays().size() != 0) {
+                doNextStepAfterScanning(scanner.getTrays().poll());
+            }
+        }else{
+            System.out.println("BaggageScanner is not activated");
         }
 
     }
@@ -57,6 +63,12 @@ public class BaggageScanner {
 //            System.out.println("Passenger "+ tray.getHandBaggage().getPassenger().getName()+ " is crispy clean!");
             //Gib Passagier Handbaggage zurück über Track 02
             track2.putTray(tray);
+        }
+    }
+
+    public void unlock(Employee employee){
+        if(getStatus().equals(Status.locked) && employee instanceof Supervisor){
+            setStatus(Status.shutdown);
         }
     }
 
