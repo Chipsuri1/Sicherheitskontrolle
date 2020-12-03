@@ -28,4 +28,15 @@ public abstract class Employee {
         return idCard;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

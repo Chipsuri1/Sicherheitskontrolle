@@ -31,15 +31,16 @@ public class TestLuca {
 
         BaggageScanner baggageScanner = new BaggageScanner();
 
-//        Assertions.assertEquals(baggageScanner.getRollerConveyor().getInspectorI1(), inspectorI1);
-//        Assertions.assertEquals(baggageScanner.getOperatingStation().getInspectorI2(), inspectorI2);
-//        Assertions.assertEquals(baggageScanner.getManualPostControl().getInspectorI3(), inspectorI3);
-//        Assertions.assertEquals(baggageScanner.getSupervision().getSupervisor(), supervisor);
-//        Assertions.assertEquals(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1(), federalPoliceOfficerO1);
-//        Assertions.assertEquals(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2(), federalPoliceOfficerO2);
-//        Assertions.assertEquals(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO3(), federalPoliceOfficerO3);
-//        Assertions.assertEquals(baggageScanner.getTechnician(), technician);
-//        Assertions.assertEquals(baggageScanner.getHouseKeeper(), houseKeeper);
+
+        Assertions.assertTrue(baggageScanner.getRollerConveyor().getInspectorI1() instanceof Inspector);
+        Assertions.assertTrue(baggageScanner.getOperatingStation().getInspectorI2() instanceof Inspector);
+        Assertions.assertTrue(baggageScanner.getManualPostControl().getInspectorI3() instanceof Inspector);
+        Assertions.assertTrue(baggageScanner.getSupervision().getSupervisor() instanceof Supervisor);
+        Assertions.assertTrue(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1() instanceof FederalPoliceOfficer);
+        Assertions.assertTrue(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2() instanceof FederalPoliceOfficer);
+        Assertions.assertTrue(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO3() instanceof FederalPoliceOfficer);
+        Assertions.assertTrue(baggageScanner.getTechnician() instanceof Technician);
+        Assertions.assertTrue(baggageScanner.getHouseKeeper() instanceof HouseKeeper);
 
     }
 }
