@@ -22,6 +22,6 @@ public enum Configuration {
     public final String fileSeparator = System.getProperty("file.separator");
     public final String userDirectory = System.getProperty("user.dir");
     public final String lineSeparator = System.getProperty("line.separator");
-    public final String DATA_FILEPATH = userDirectory + fileSeparator + "src\\main\\resources" + fileSeparator + "passenger_baggage.txt" + fileSeparator;
+    public final String DATA_FILEPATH = userDirectory + fileSeparator + "src\\main\\resources\\passenger_baggage.txt\\";
 
 }
