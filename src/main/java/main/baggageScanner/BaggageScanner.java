@@ -36,14 +36,6 @@ public class BaggageScanner {
         operatingStation.getInspectorI2().push(operatingStation.getButtonLeft());
         operatingStation.getInspectorI2().push(operatingStation.getButtonRectangle());
 
-        Iterator iterator = scanner.getTrays().iterator();
-
-//        while(iterator.hasNext()){
-//            doNextStepAfterScanning((Tray) iterator.next();
-//            for (Object o : ) {
-//
-//            }
-//        }
         while (scanner.getTrays().size() != 0) {
             doNextStepAfterScanning(scanner.getTrays().poll());
         }

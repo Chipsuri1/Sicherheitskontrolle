@@ -1,6 +1,7 @@
 package main.employee;
 
 import main.IDCard;
+import main.button.Button;
 
 public abstract class Employee {
 
@@ -17,6 +18,10 @@ public abstract class Employee {
 
 
         idCard = new IDCard();
+    }
+
+    public void push(Button button){
+        button.buttonAction();
     }
 
     public IDCard getIdCard() {

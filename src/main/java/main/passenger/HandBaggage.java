@@ -6,6 +6,7 @@ public class HandBaggage {
 
     private Passenger passenger = null;
     private Tray tray;
+    private char[][] content = new char[1000][50];
     private Layer[] layers = new Layer[5];
 
     public HandBaggage(){

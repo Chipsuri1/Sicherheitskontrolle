@@ -38,9 +38,9 @@ public class FederalPoliceOfficer extends Employee {
 
     }
 
-    public void workWithRobot() {
+    public void workWithRobot(HandBaggage handBaggage) {
         Robot robot = federalPoliceOffice.getRobots().get(Configuration.instance.mersenneTwister.nextInt(2));
-        robot.defuse();
+        robot.defuse(handBaggage);
     }
 
     public void openHandBaggageGetWeaponAndGiveToOfficer03(Tray tray) {

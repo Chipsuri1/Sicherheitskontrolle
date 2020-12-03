@@ -44,9 +44,6 @@ public class Inspector extends Employee {
         }
     }
 
-    public void push(Button button){
-        button.buttonAction();
-    }
 
     public void doManualPostControl(BaggageScanner baggageScanner, Tray tray) {
         record = tray.getRecord();
@@ -91,6 +88,7 @@ public class Inspector extends Employee {
                     TestStripe testStripe = new TestStripe();
                     swipeTestStripe(testStripe);
                     putTestStripeIntoExplosiveTraceDetector(baggageScanner.getManualPostControl().getExplosiveTraceDetector(), testStripe);
+
                 }
             }
         } else {
