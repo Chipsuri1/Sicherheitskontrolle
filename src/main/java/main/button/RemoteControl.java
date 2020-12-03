@@ -1,15 +1,18 @@
 package main.button;
 
+import main.FederalPoliceOffice;
 import main.Robot;
+import main.configuration.Configuration;
 
 public class RemoteControl extends Button {
-    private Robot robot;
+    private FederalPoliceOffice federalPoliceOffice;
 
-    public RemoteControl(Robot robot){
-        this.robot = robot;
+    public RemoteControl(FederalPoliceOffice federalPoliceOffice){
+        this.federalPoliceOffice = federalPoliceOffice;
     }
 
     public void buttonAction(){
-
+        Robot robot = federalPoliceOffice.getRobots().get(Configuration.instance.mersenneTwister.nextInt(2));
+        robot.defuse(handBaggage);
     }
 }

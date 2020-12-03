@@ -5,6 +5,8 @@ import main.MagnetStripe;
 import main.ProfilType;
 import main.Robot;
 import main.baggageScanner.Tray;
+import main.button.Button;
+import main.button.RemoteControl;
 import main.configuration.Configuration;
 import main.passenger.HandBaggage;
 import main.passenger.Layer;
@@ -22,12 +24,14 @@ public class FederalPoliceOfficer extends Employee {
     private char thing;
     private List<HandBaggage> baggagesOfArrested;
     private Passenger passenger;
+    private RemoteControl remoteControl;
 
 
     public FederalPoliceOfficer(int id, String name, String birthDate, FederalPoliceOffice federalPoliceOffice) {
         super(id, name, birthDate);
 
         this.federalPoliceOffice = federalPoliceOffice;
+        this.remoteControl = new RemoteControl(federalPoliceOffice);
         getIdCard().setType(external);
         getIdCard().setMagnetStripe(new MagnetStripe(ProfilType.O, getIdCard().getSecretKey()));
         baggagesOfArrested = new ArrayList<>();
@@ -38,9 +42,12 @@ public class FederalPoliceOfficer extends Employee {
 
     }
 
-    public void workWithRobot() {
-        Robot robot = federalPoliceOffice.getRobots().get(Configuration.instance.mersenneTwister.nextInt(2));
-        robot.defuse();
+    public void push(Button button, Tray tray){
+        button.buttonAction(tray);
+    }
+
+    public void workWithRobot(HandBaggage handBaggage) {
+
     }
 
     public void openHandBaggageGetWeaponAndGiveToOfficer03(Tray tray) {
@@ -69,5 +76,9 @@ public class FederalPoliceOfficer extends Employee {
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public RemoteControl getRemoteControl() {
+        return remoteControl;
     }
 }

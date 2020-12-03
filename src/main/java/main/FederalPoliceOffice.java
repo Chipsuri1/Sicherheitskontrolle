@@ -41,6 +41,9 @@ public class FederalPoliceOffice {
     public FederalPoliceOfficer reqestOfficer2(BaggageScanner baggageScanner) {
         return federalPoliceOfficerO2;
     }
+    public FederalPoliceOfficer reqestOfficer3(BaggageScanner baggageScanner) {
+        return federalPoliceOfficerO3;
+    }
 
     public List<Robot> getRobots() {
         return robots;
