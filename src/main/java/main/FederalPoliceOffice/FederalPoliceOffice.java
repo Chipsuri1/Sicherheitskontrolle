@@ -1,4 +1,4 @@
-package main;
+package main.FederalPoliceOffice;
 
 import main.baggageScanner.BaggageScanner;
 import main.employee.FederalPoliceOfficer;

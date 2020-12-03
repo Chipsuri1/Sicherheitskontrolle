@@ -1,11 +1,9 @@
 package main.baggageScanner;
 
-import main.FederalPoliceOffice;
+import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.Record;
 import main.ScanResult;
 import main.Status;
-
-import java.util.Iterator;
 
 import static main.Status.shutdown;
 import static main.Status.start;

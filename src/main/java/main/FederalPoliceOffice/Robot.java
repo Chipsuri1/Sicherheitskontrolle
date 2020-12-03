@@ -1,4 +1,4 @@
-package main;
+package main.FederalPoliceOffice;
 
 import main.configuration.Configuration;
 import main.passenger.HandBaggage;

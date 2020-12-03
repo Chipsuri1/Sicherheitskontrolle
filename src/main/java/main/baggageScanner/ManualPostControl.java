@@ -78,9 +78,9 @@ public class ManualPostControl {
                 officer2InPresence = null;
                 officer3InPresence = null;
                 passengerInPresence = null;
-                supervisorInPresence.unlock(baggageScanner);
 
             }
+            supervisorInPresence.unlock(baggageScanner);
         } else {
             //NO ILLEGAL ITEM
         }

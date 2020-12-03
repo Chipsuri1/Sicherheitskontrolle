@@ -1,11 +1,10 @@
 package main.employee;
 
-import main.FederalPoliceOffice;
+import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.MagnetStripe;
 import main.ProfilType;
-import main.Robot;
+import Robot;
 import main.baggageScanner.Tray;
-import main.button.Button;
 import main.button.RemoteControl;
 import main.configuration.Configuration;
 import main.passenger.HandBaggage;
