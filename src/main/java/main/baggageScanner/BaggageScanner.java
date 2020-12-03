@@ -47,8 +47,8 @@ public class BaggageScanner {
 
         if (record.getResult().getScanResult().equals(ScanResult.knife) || record.getResult().getScanResult().equals(ScanResult.weapon) || record.getResult().getScanResult().equals(ScanResult.explosive)) {
             //manuelle Nachkontrolle durch Inspektor I3 auf Track 01
-
-            manualPostControl.makeManuelPostControll(this, tray);
+            manualPostControl.setTray(tray);
+            manualPostControl.makeManuelPostControll(this);
 
         } else {
 //            System.out.println("Passenger "+ tray.getHandBaggage().getPassenger().getName()+ " is crispy clean!");

@@ -15,6 +15,7 @@ public class ManualPostControl {
 
     private Passenger passengerInPresence;
     private Supervisor supervisorInPresence;
+    private Tray tray;
 
 
     public Inspector getInspectorI3() {
@@ -25,13 +26,13 @@ public class ManualPostControl {
         return explosiveTraceDetector;
     }
 
-    public void makeManuelPostControll(BaggageScanner baggageScanner, Tray tray) {
+    public void makeManuelPostControll(BaggageScanner baggageScanner) {
         getInspectorI3().putOnTrack1(baggageScanner, tray);
         baggageScanner.getTrack1().getTrays().remove(tray);
-        doManualPostControl(baggageScanner, tray);
+        doManualPostControl(baggageScanner);
     }
 
-    public void doManualPostControl(BaggageScanner baggageScanner, Tray tray) {
+    public void doManualPostControl(BaggageScanner baggageScanner) {
         Record record = tray.getRecord();
         //Knife
         if (record.getResult().getScanResult().equals(ScanResult.knife)) {
@@ -62,7 +63,7 @@ public class ManualPostControl {
                 officer2InPresence.push(officer2InPresence.getRemoteControl(), tray);
 
                 officer2InPresence.workWithRobot(tray.getHandBaggage());
-            } else    if (record.getResult().getScanResult().equals(ScanResult.weapon)){
+            } else if (record.getResult().getScanResult().equals(ScanResult.weapon)){
                 //weapon
                 passengerInPresence = tray.getHandBaggage().getPassenger();
                 supervisorInPresence = baggageScanner.getSupervision().getSupervisor();
@@ -83,5 +84,13 @@ public class ManualPostControl {
         } else {
             //NO ILLEGAL ITEM
         }
+    }
+
+    public void setTray(Tray tray) {
+        this.tray = tray;
+    }
+
+    public Tray getTray() {
+        return tray;
     }
 }

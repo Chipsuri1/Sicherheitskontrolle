@@ -20,7 +20,6 @@ public class Inspector extends Employee {
     private Record record;
     private FederalPoliceOfficer officer1;
     private FederalPoliceOfficer officer2;
-    private Record record;
 
 
     public Inspector(int id, String name, String birthDate, boolean isSenior) {
