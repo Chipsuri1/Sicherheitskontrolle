@@ -1,7 +1,7 @@
 package main.button;
 
 import main.FederalPoliceOffice.FederalPoliceOffice;
-import Robot;
+import main.FederalPoliceOffice.Robot;
 import main.configuration.Configuration;
 
 public class RemoteControl extends Button {

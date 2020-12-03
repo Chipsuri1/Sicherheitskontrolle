@@ -17,8 +17,6 @@ public class SecurityControl {
     private Queue<Passenger> passengerList = new LinkedList<>();
     private BaggageScanner baggageScanner = new BaggageScanner();
 
-    private Technician technician = new Technician(6, "Jason Statham", "26.07.1967");
-    private HouseKeeper houseKeeper = new HouseKeeper(7, "Jason Clarke", "17.07.1969");
 
     public SecurityControl(){
         initPassengers();

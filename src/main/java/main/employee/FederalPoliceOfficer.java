@@ -3,7 +3,6 @@ package main.employee;
 import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.MagnetStripe;
 import main.ProfilType;
-import Robot;
 import main.baggageScanner.Tray;
 import main.button.RemoteControl;
 import main.configuration.Configuration;
@@ -39,11 +38,6 @@ public class FederalPoliceOfficer extends Employee {
 
     public void arrest(Passenger passenger) {
 
-    }
-
-    public void workWithRobot() {
-        Robot robot = federalPoliceOffice.getRobots().get(Configuration.instance.mersenneTwister.nextInt(2));
-        robot.defuse();
     }
 
     public void openHandBaggageGetWeaponAndGiveToOfficer03(Tray tray) {

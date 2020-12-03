@@ -4,6 +4,8 @@ import main.FederalPoliceOffice.FederalPoliceOffice;
 import main.Record;
 import main.ScanResult;
 import main.Status;
+import main.employee.HouseKeeper;
+import main.employee.Technician;
 
 import static main.Status.shutdown;
 import static main.Status.start;
@@ -20,6 +22,9 @@ public class BaggageScanner {
 
     private Track track1 = new Track();
     private Track track2 = new Track();
+
+    private Technician technician = new Technician(6, "Jason Statham", "26.07.1967");
+    private HouseKeeper houseKeeper = new HouseKeeper(7, "Jason Clarke", "17.07.1969");
 
     private Status status = shutdown;
 
@@ -105,6 +110,14 @@ public class BaggageScanner {
 
     public FederalPoliceOffice getFederalPoliceOffice() {
         return federalPoliceOffice;
+    }
+
+    public HouseKeeper getHouseKeeper() {
+        return houseKeeper;
+    }
+
+    public Technician getTechnician() {
+        return technician;
     }
 }
 
