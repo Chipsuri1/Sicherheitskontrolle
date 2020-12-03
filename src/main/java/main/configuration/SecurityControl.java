@@ -9,12 +9,14 @@ import main.passenger.Passenger;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 
 public class SecurityControl {
 
     private Queue<Passenger> passengerList = new LinkedList<>();
+    private List<HandBaggage> handBaggages = new LinkedList<>();
     private BaggageScanner baggageScanner = new BaggageScanner();
 
 
@@ -28,6 +30,7 @@ public class SecurityControl {
             Passenger passenger = passengerList.poll();
 //            System.out.println("It´s "+ passenger.getName()+" turn, handbaggages are put into trays!");
             for(int j = 0; j < passenger.getHandBaggage().length; j++){
+                handBaggages.add(passenger.getHandBaggage()[j]);
                 Tray tray = new Tray((passenger.getHandBaggage()[j]));
                 passenger.getHandBaggage()[j].setTray(tray);
                 baggageScanner.getRollerConveyor().getTrays().add(tray);
@@ -56,5 +59,9 @@ public class SecurityControl {
 
     public Queue<Passenger> getPassengerList() {
         return passengerList;
+    }
+
+    public List<HandBaggage> getHandBaggages() {
+        return handBaggages;
     }
 }
