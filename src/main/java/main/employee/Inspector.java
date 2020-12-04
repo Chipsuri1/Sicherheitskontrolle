@@ -40,11 +40,6 @@ public class Inspector extends Employee {
         }
     }
 
-    public void push(Button button){
-        button.buttonAction();
-    }
-
-
     public void swipeTestStripe(TestStripe testStripe){
         testStripe.setExp();
     }

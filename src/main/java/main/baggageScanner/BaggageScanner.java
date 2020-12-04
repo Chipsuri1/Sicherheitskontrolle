@@ -9,8 +9,7 @@ import main.employee.HouseKeeper;
 import main.employee.Supervisor;
 import main.employee.Technician;
 
-import static main.Status.shutdown;
-import static main.Status.start;
+import static main.Status.*;
 
 public class BaggageScanner {
 
@@ -25,7 +24,7 @@ public class BaggageScanner {
     private Track track1 = new Track();
     private Track track2 = new Track();
 
-    private Technician technician = new Technician(6, "Jason Statham", "26.07.1967");
+    private Technician technician = new Technician(6, "Jason Statham", "26.07.1967", this);
     private HouseKeeper houseKeeper = new HouseKeeper(7, "Jason Clarke", "17.07.1969");
 
     private Status status = shutdown;
@@ -39,14 +38,14 @@ public class BaggageScanner {
     public void scanHandBaggage() {
         if(getStatus().equals(Status.activated)){
             rollerConveyor.getInspectorI1().pushHandBaggage(rollerConveyor.getTrays(), belt.getTrays());
-            operatingStation.getInspectorI2().push(operatingStation.getButtonLeft());
+            operatingStation.getInspectorI2().push(operatingStation.getButtonRight());
             operatingStation.getInspectorI2().push(operatingStation.getButtonRectangle());
 
             while (scanner.getTrays().size() != 0) {
                 doNextStepAfterScanning(scanner.getTrays().poll());
             }
         }else{
-            System.out.println("BaggageScanner is not activated");
+            System.out.println("BaggageScanner is not activated, status: " + getStatus());
         }
 
     }
@@ -66,10 +65,22 @@ public class BaggageScanner {
         }
     }
 
-    public void unlock(Employee employee){
-        if(getStatus().equals(Status.locked) && employee instanceof Supervisor){
-            setStatus(Status.shutdown);
+    public boolean maintenance(Employee employee){
+        if(employee instanceof Technician){
+            setStatus(maintenance);
+            //do maintenance
+            setStatus(activated);
+            return true;
         }
+        return false;
+    }
+
+    public boolean unlock(Employee employee){
+        if(getStatus().equals(Status.locked) && employee instanceof Supervisor){
+            setStatus(activated);
+            return true;
+        }
+        return false;
     }
 
     public OperatingStation getOperatingStation() {
@@ -105,7 +116,7 @@ public class BaggageScanner {
     }
 
     public void start() {
-        setStatus(start);
+        setStatus(deactivated);
     }
 
     public void shutdown() {

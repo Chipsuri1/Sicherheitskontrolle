@@ -2,8 +2,6 @@ package main.configuration;
 
 import main.baggageScanner.BaggageScanner;
 import main.baggageScanner.Tray;
-import main.employee.HouseKeeper;
-import main.employee.Technician;
 import main.passenger.HandBaggage;
 import main.passenger.Passenger;
 
@@ -16,7 +14,7 @@ import java.util.Queue;
 public class SecurityControl {
 
     private Queue<Passenger> passengerList = new LinkedList<>();
-    private List<HandBaggage> handBaggages = new LinkedList<>();
+    private List<HandBaggage> handBaggage = new LinkedList<>();
     private BaggageScanner baggageScanner = new BaggageScanner();
 
 
@@ -30,16 +28,18 @@ public class SecurityControl {
             Passenger passenger = passengerList.poll();
 //            System.out.println("It´s "+ passenger.getName()+" turn, handbaggages are put into trays!");
             for(int j = 0; j < passenger.getHandBaggage().length; j++){
-                handBaggages.add(passenger.getHandBaggage()[j]);
+                handBaggage.add(passenger.getHandBaggage()[j]);
                 Tray tray = new Tray((passenger.getHandBaggage()[j]));
                 passenger.getHandBaggage()[j].setTray(tray);
                 baggageScanner.getRollerConveyor().getTrays().add(tray);
                 passenger.getHandBaggage()[j] = null;
             }
 //            System.out.println("Now Handbaggages of "+ passenger.getName()+" get scanned!");
+            System.out.println(passengerList.size());
             baggageScanner.scanHandBaggage();
 
         }
+        baggageScanner.getTechnician().maintenance();
 
     }
 
@@ -65,7 +65,7 @@ public class SecurityControl {
         return baggageScanner;
     }
 
-    public List<HandBaggage> getHandBaggages() {
-        return handBaggages;
+    public List<HandBaggage> getHandBaggage() {
+        return handBaggage;
     }
 }

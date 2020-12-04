@@ -1,6 +1,8 @@
 package main.button;
 
 import main.baggageScanner.Scanner;
+import main.employee.Employee;
+import main.employee.Inspector;
 
 public class ButtonRectangle extends Button {
 
@@ -10,7 +12,12 @@ public class ButtonRectangle extends Button {
         this.scanner = scanner;
     }
 
-    public void buttonAction(){
-        scanner.startScanning();
+    public boolean buttonAction(Employee employee){
+        if(employee instanceof Inspector){
+            scanner.startScanning();
+            return true;
+        }else{
+            return false;
+        }
     }
 }

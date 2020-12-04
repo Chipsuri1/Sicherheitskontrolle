@@ -2,6 +2,7 @@ package main.baggageScanner;
 
 import main.button.ButtonLeft;
 import main.button.ButtonRectangle;
+import main.button.ButtonRight;
 import main.employee.Inspector;
 
 public class OperatingStation {
@@ -10,10 +11,12 @@ public class OperatingStation {
 
     private CardReader cardReader;
     private ButtonLeft buttonLeft;
+    private ButtonRight buttonRight;
     private ButtonRectangle buttonRectangle;
 
     public OperatingStation(Scanner scanner, Belt belt, BaggageScanner baggageScanner){
         buttonLeft = new ButtonLeft(scanner, belt);
+        buttonRight = new ButtonRight(scanner, belt);
         buttonRectangle = new ButtonRectangle(scanner);
         cardReader = new CardReader(baggageScanner);
     }
@@ -36,5 +39,7 @@ public class OperatingStation {
         return buttonRectangle;
     }
 
-
+    public ButtonRight getButtonRight() {
+        return buttonRight;
+    }
 }

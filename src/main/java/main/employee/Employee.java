@@ -21,8 +21,8 @@ public abstract class Employee {
     }
 
 
-    public void push(Button button){
-        button.buttonAction();
+    public boolean push(Button button){
+        return button.buttonAction(this);
     }
 
     public IDCard getIdCard() {

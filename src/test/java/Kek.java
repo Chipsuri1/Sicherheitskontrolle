@@ -125,7 +125,7 @@ public class Kek {
         //TODO fix mal das auskommentierte
         //ich teste jetzt hier obs 609 (das geht grad nicht, kp warum)records gibt als Zahl und prüfe nochmal jeden ab, ob zu jedem baggage/tray ein Record existiert
         securityControl.checkPassengers();
-        List<HandBaggage> handBaggages = securityControl.getHandBaggages();
+        List<HandBaggage> handBaggages = securityControl.getHandBaggage();
 //        int counter = 0;
 //        for (HandBaggage handBaggage : handBaggages) {
 //            if(handBaggage.getTray().getRecord() != null){

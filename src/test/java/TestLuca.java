@@ -25,19 +25,13 @@ public class TestLuca {
     @Test
     @Order(2)
     public void assignStationsWithEmployees() {
-        Inspector inspectorI1 = new Inspector(1, "Clint Eastwood", "31.05.1930", true);
         Inspector inspectorI2 = new Inspector(2, "Natalie Portman", "09.06.1981", false);
         Inspector inspectorI3 = new Inspector(3, "Bruce Willis", "19.03.1955", true);
-        Supervisor supervisor = new Supervisor(4, "Jodie Foster", "19.11.1962", false, false);
-        FederalPoliceOfficer federalPoliceOfficerO1 = new FederalPoliceOfficer(5, "Wesley Snipes", "31.07.1962", null);
-        Technician technician = new Technician(6, "Jason Statham",  "26.07.1967");
-        HouseKeeper houseKeeper = new HouseKeeper(7, "Jason Clarke", "17.07.1969");
+
         FederalPoliceOfficer federalPoliceOfficerO2 = new FederalPoliceOfficer(8, "Toto", "01.01.1969", null);
         FederalPoliceOfficer federalPoliceOfficerO3 = new FederalPoliceOfficer(9, "Harry", "01.01.1969", null);
 
         BaggageScanner baggageScanner = new BaggageScanner();
-
-
 
 
         Assertions.assertTrue(baggageScanner.getRollerConveyor().getInspectorI1() instanceof Inspector);
@@ -70,11 +64,13 @@ public class TestLuca {
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         Assertions.assertEquals(baggageScanner.getStatus(), Status.locked);
+
         baggageScanner.setStatus(Status.shutdown);
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "5000");
         Assertions.assertEquals(baggageScanner.getStatus(), Status.locked);
+
         baggageScanner.getSupervision().getSupervisor().unlock(baggageScanner);
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
@@ -84,15 +80,48 @@ public class TestLuca {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     public void checkCardOfEmployee(){
         IDCard idCardProfileTypeK = new IDCard();
         IDCard idCardProfileTypeO = new IDCard();
-        idCardProfileTypeK.setMagnetStripe(new MagnetStripe(ProfilType.K, "1000"));
-        idCardProfileTypeO.setMagnetStripe(new MagnetStripe(ProfilType.O, "1000"));
+        IDCard idCardProfileTypeI = new IDCard();
+        idCardProfileTypeK.setMagnetStripe(new MagnetStripe(ProfilType.K, "dhbw$20^20_"));
+        idCardProfileTypeO.setMagnetStripe(new MagnetStripe(ProfilType.O, "dhbw$20^20_"));
+        idCardProfileTypeI.setMagnetStripe(new MagnetStripe(ProfilType.I, "dhbw$20^20_"));
 
-        Assertions.assertFalse(baggageScanner.getOperatingStation().getCardReader().scan(idCardProfileTypeK, "1000"));
-        Assertions.assertFalse(baggageScanner.getOperatingStation().getCardReader().scan(idCardProfileTypeO, "1000"));
+        Assertions.assertFalse(baggageScanner.getOperatingStation().getCardReader().scan(idCardProfileTypeK, "5000"));
+        Assertions.assertFalse(baggageScanner.getOperatingStation().getCardReader().scan(idCardProfileTypeO, "5000"));
+        Assertions.assertTrue(baggageScanner.getOperatingStation().getCardReader().scan(idCardProfileTypeI, "5000"));
+    }
+
+    @Test
+    @Order(5)
+    public void employeesHaveCorrectUsageRights(){
+        Inspector inspectorI1 = new Inspector(1, "Clint Eastwood", "31.05.1930", true);
+        FederalPoliceOfficer federalPoliceOfficerO1 = new FederalPoliceOfficer(5, "Wesley Snipes", "31.07.1962", null);
+        Technician technician = new Technician(6, "Jason Statham",  "26.07.1967", baggageScanner);
+        HouseKeeper houseKeeper = new HouseKeeper(7, "Jason Clarke", "17.07.1969");
+        Supervisor supervisor = new Supervisor(4, "Jodie Foster", "19.11.1962", false, false);
+
+        Assertions.assertTrue(baggageScanner.maintenance(technician));
+        Assertions.assertFalse(baggageScanner.maintenance(inspectorI1));
+        Assertions.assertFalse(baggageScanner.maintenance(federalPoliceOfficerO1));
+        Assertions.assertFalse(baggageScanner.maintenance(houseKeeper));
+        Assertions.assertFalse(baggageScanner.maintenance(supervisor));
+
+        baggageScanner.setStatus(Status.locked);
+        Assertions.assertTrue(baggageScanner.unlock(supervisor));
+        Assertions.assertFalse(baggageScanner.unlock(inspectorI1));
+        Assertions.assertFalse(baggageScanner.unlock(technician));
+        Assertions.assertFalse(baggageScanner.unlock(federalPoliceOfficerO1));
+        Assertions.assertFalse(baggageScanner.unlock(houseKeeper));
+
+        Assertions.assertTrue(baggageScanner.getOperatingStation().getInspectorI2().push(baggageScanner.getOperatingStation().getButtonRight()));
+        Assertions.assertTrue(baggageScanner.getOperatingStation().getInspectorI2().push(baggageScanner.getOperatingStation().getButtonLeft()));
+        Assertions.assertTrue(baggageScanner.getOperatingStation().getInspectorI2().push(baggageScanner.getOperatingStation().getButtonRectangle()));
+        Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonRectangle()));
+        Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonRight()));
+        Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonLeft()));
     }
 
     @Test
@@ -100,7 +129,7 @@ public class TestLuca {
     public void onlySupervisorCanUnlockBaggageScanner(){
         baggageScanner.setStatus(Status.locked);
         baggageScanner.getSupervision().getSupervisor().unlock(baggageScanner);
-        Assertions.assertEquals(baggageScanner.getStatus(), Status.shutdown);
+        Assertions.assertEquals(baggageScanner.getStatus(), Status.activated);
     }
 
     @Test
@@ -114,7 +143,7 @@ public class TestLuca {
         baggageScanner.getScanner().startScanning();
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().size(), 1);
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getScanResult(), ScanResult.weapon);
-
+        Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getPosition(), "prohibited item | weapon - glock7 detected at position 100");
     }
 
     @Test
@@ -128,6 +157,7 @@ public class TestLuca {
         baggageScanner.getScanner().startScanning();
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().size(), 1);
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getScanResult(), ScanResult.knife);
+        Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getPosition(), "prohibited item | knife detected at position 100");
 
     }
 
@@ -142,6 +172,6 @@ public class TestLuca {
         baggageScanner.getScanner().startScanning();
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().size(), 1);
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getScanResult(), ScanResult.explosive);
-
+        Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getPosition(), "prohibited item | explosive detected at position 100");
     }
 }

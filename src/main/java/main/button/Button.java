@@ -1,8 +1,11 @@
 package main.button;
 
+import main.employee.Employee;
+
 public abstract class Button {
 
-    public void buttonAction() {
+    public boolean buttonAction(Employee employee) {
+        return false;
     }
 
 
