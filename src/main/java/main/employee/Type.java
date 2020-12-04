@@ -1,4 +1,4 @@
-package main;
+package main.employee;
 
 public enum Type {
 staff, external

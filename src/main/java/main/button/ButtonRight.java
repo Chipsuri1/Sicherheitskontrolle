@@ -1,11 +1,9 @@
 package main.button;
 
-import main.baggageScanner.Belt;
-import main.baggageScanner.Scanner;
+import main.baggageScanner.components.Belt;
+import main.baggageScanner.components.Scanner;
 import main.employee.Employee;
 import main.employee.Inspector;
-
-import javax.print.DocFlavor;
 
 public class ButtonRight extends Button {
 

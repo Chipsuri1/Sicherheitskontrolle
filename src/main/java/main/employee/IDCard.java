@@ -1,4 +1,4 @@
-package main;
+package main.employee;
 
 import java.util.UUID;
 

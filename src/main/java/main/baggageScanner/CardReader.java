@@ -1,8 +1,8 @@
 package main.baggageScanner;
 
-import main.IDCard;
-import main.ProfilType;
-import main.Status;
+import main.employee.IDCard;
+import main.baggageScanner.components.BaggageScanner;
+import main.employee.ProfilType;
 import main.configuration.Configuration;
 
 

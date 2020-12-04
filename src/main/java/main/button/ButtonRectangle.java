@@ -1,6 +1,6 @@
 package main.button;
 
-import main.baggageScanner.Scanner;
+import main.baggageScanner.components.Scanner;
 import main.employee.Employee;
 import main.employee.Inspector;
 

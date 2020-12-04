@@ -1,5 +1,6 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
 
+import main.baggageScanner.CardReader;
 import main.button.ButtonLeft;
 import main.button.ButtonRectangle;
 import main.button.ButtonRight;

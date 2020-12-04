@@ -1,6 +1,6 @@
 package main.configuration;
 
-import main.baggageScanner.BaggageScanner;
+import main.baggageScanner.components.BaggageScanner;
 import main.baggageScanner.Tray;
 import main.passenger.HandBaggage;
 import main.passenger.Passenger;

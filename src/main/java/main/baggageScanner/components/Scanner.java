@@ -1,9 +1,10 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
 
-import main.Record;
-import main.Result;
-import main.ScanResult;
-import main.Status;
+import main.FederalPoliceOffice.Result;
+import main.FederalPoliceOffice.ScanResult;
+import main.baggageScanner.Record;
+import main.baggageScanner.Status;
+import main.baggageScanner.Tray;
 import main.configuration.Configuration;
 import main.passenger.Layer;
 

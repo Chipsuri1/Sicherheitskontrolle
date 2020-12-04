@@ -1,14 +1,20 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
+
+import main.baggageScanner.Tray;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class Belt {
+public class Track {
+
     private Queue<Tray> trays = new LinkedList<>();
 
 
     public Queue<Tray> getTrays() {
         return trays;
+    }
+
+    public void putTray(Tray tray) {
+        trays.offer(tray);
     }
 }

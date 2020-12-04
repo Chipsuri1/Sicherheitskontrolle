@@ -1,6 +1,7 @@
-package main;
+package main.employee;
 
 import main.configuration.Configuration;
+import main.employee.ProfilType;
 
 
 public class MagnetStripe {

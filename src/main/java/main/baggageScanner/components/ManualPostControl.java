@@ -1,7 +1,11 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
 
-import main.*;
-import main.Record;
+import main.FederalPoliceOffice.ExplosiveTraceDetector;
+import main.FederalPoliceOffice.ScanResult;
+import main.FederalPoliceOffice.TestStripe;
+import main.baggageScanner.Record;
+import main.baggageScanner.Tray;
+import main.baggageScanner.components.BaggageScanner;
 import main.employee.FederalPoliceOfficer;
 import main.employee.Inspector;
 import main.employee.Supervisor;

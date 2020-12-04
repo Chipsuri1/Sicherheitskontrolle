@@ -1,4 +1,6 @@
-package main;
+package main.baggageScanner;
+
+import main.FederalPoliceOffice.Result;
 
 import main.passenger.HandBaggage;
 

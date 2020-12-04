@@ -1,7 +1,6 @@
-import main.*;
-import main.FederalPoliceOffice.FederalPoliceOffice;
-import main.baggageScanner.BaggageScanner;
-import main.baggageScanner.Scanner;
+import main.FederalPoliceOffice.ScanResult;
+import main.baggageScanner.components.BaggageScanner;
+import main.baggageScanner.Status;
 import main.baggageScanner.Tray;
 import main.configuration.SecurityControl;
 import main.employee.*;
@@ -25,15 +24,6 @@ public class TestLuca {
     @Test
     @Order(2)
     public void assignStationsWithEmployees() {
-        Inspector inspectorI2 = new Inspector(2, "Natalie Portman", "09.06.1981", false);
-        Inspector inspectorI3 = new Inspector(3, "Bruce Willis", "19.03.1955", true);
-
-        FederalPoliceOfficer federalPoliceOfficerO2 = new FederalPoliceOfficer(8, "Toto", "01.01.1969", null);
-        FederalPoliceOfficer federalPoliceOfficerO3 = new FederalPoliceOfficer(9, "Harry", "01.01.1969", null);
-
-        BaggageScanner baggageScanner = new BaggageScanner();
-
-
         Assertions.assertTrue(baggageScanner.getRollerConveyor().getInspectorI1() instanceof Inspector);
         Assertions.assertTrue(baggageScanner.getRollerConveyor().getInspectorI1().getName().equals("Clint Eastwood"));
         Assertions.assertTrue(baggageScanner.getOperatingStation().getInspectorI2() instanceof Inspector);
@@ -52,7 +42,6 @@ public class TestLuca {
         Assertions.assertTrue(baggageScanner.getTechnician().getName().equals("Jason Statham"));
         Assertions.assertTrue(baggageScanner.getHouseKeeper() instanceof HouseKeeper);
         Assertions.assertTrue(baggageScanner.getHouseKeeper().getName().equals("Jason Clarke"));
-
     }
 
 
@@ -76,7 +65,6 @@ public class TestLuca {
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "4000");
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "5000");
         Assertions.assertEquals(baggageScanner.getStatus(), Status.activated);
-
     }
 
     @Test
@@ -170,9 +158,9 @@ public class TestLuca {
     public void checkIfHandBaggageContainsExplosive(){
         int positionOfWeapon = 100;
 
-        HandBaggage handBaggage = new HandBaggage();
-        handBaggage.getLayers()[0].getContent()[positionOfWeapon] = 'E';
-        baggageScanner.getScanner().getTrays().add(new Tray(handBaggage));
+        HandBaggage handBaggage1 = new HandBaggage();
+        handBaggage1.getLayers()[0].getContent()[positionOfWeapon] = 'E';
+        baggageScanner.getScanner().getTrays().add(new Tray(handBaggage1));
         baggageScanner.getScanner().startScanning();
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().size(), 1);
         Assertions.assertEquals(baggageScanner.getScanner().getRecords().peek().getResult().getScanResult(), ScanResult.explosive);

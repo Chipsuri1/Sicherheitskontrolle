@@ -1,10 +1,8 @@
 package main.employee;
 
-import main.MagnetStripe;
-import main.ProfilType;
-import main.baggageScanner.BaggageScanner;
+import main.baggageScanner.components.BaggageScanner;
 
-import static main.Type.external;
+import static main.employee.Type.external;
 
 public class Technician extends Employee {
 
