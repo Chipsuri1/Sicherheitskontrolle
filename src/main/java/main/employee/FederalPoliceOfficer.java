@@ -1,8 +1,6 @@
 package main.employee;
 
 import main.FederalPoliceOffice.FederalPoliceOffice;
-import main.MagnetStripe;
-import main.ProfilType;
 import main.baggageScanner.Tray;
 import main.button.RemoteControl;
 import main.passenger.HandBaggage;
@@ -12,7 +10,6 @@ import main.passenger.Passenger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.Type.external;
 
 public class FederalPoliceOfficer extends Employee {
 
@@ -28,7 +25,7 @@ public class FederalPoliceOfficer extends Employee {
 
         this.federalPoliceOffice = federalPoliceOffice;
         this.remoteControl = new RemoteControl(federalPoliceOffice);
-        getIdCard().setType(external);
+        getIdCard().setType(Type.external);
         getIdCard().setMagnetStripe(new MagnetStripe(ProfilType.O, getIdCard().getSecretKey()));
         baggagesOfArrested = new ArrayList<>();
         things = new ArrayList<>();
