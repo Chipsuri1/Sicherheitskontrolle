@@ -24,9 +24,9 @@ public class Robot {
         }
 
         int number = 0;
-        for (int i = 0; i < handBaggage.getLayers().length; i++) {
-            for (int j = 0; j < handBaggage.getLayers()[i].getContent().length; j++) {
-                handBaggage.getLayers()[i].getContent()[j] = stringBuilder.toString().charAt(number);
+        for (int i = 0; i < handBaggage.getContent().length; i++) {
+            for (int j = 0; j < handBaggage.getContent()[i].length; j++) {
+                handBaggage.getContent()[i][j] = stringBuilder.toString().charAt(number);
                 number++;
             }
         }

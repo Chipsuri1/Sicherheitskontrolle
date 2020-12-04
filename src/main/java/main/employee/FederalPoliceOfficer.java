@@ -10,6 +10,7 @@ import main.passenger.Passenger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static main.employee.Type.external;
 
 public class FederalPoliceOfficer extends Employee {
 
