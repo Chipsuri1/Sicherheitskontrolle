@@ -41,6 +41,12 @@ public class AllTests {
         }
     }
 
+    @Order(1)
+    @Test
+    public void wrapTestOne(){
+        dynamicTestsExampleName();
+        dynamicTestsBaggage();
+    }
 
     @TestFactory
     public Stream<DynamicTest> dynamicTestsExampleName() {
@@ -64,9 +70,9 @@ public class AllTests {
         return dynamicTestNameList.stream();
     }
 
-    @Order(1)
     @TestFactory
     Stream<DynamicTest> dynamicTestsBaggage() {
+        setup();
         setUpPassengers();
         int baggageCounter = 0;
         int personCounter = 0;
@@ -311,8 +317,8 @@ public class AllTests {
                         foundIllegal = true;
                     }
                 }
+                Assert.assertFalse(foundIllegal);
             }
-            Assert.assertFalse(foundIllegal);
         }
     }
 
