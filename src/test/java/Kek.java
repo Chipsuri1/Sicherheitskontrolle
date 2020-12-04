@@ -1,5 +1,3 @@
-import main.Record;
-import main.Status;
 import main.baggageScanner.Tray;
 import main.configuration.Configuration;
 import main.configuration.SecurityControl;
@@ -212,6 +210,7 @@ public class Kek {
     @Order(13)
     public void checkWeapon() {
         setUpPassengers();
+        securityControl = null;
         securityControl = new SecurityControl();
         int weaponCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {

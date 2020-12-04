@@ -6,13 +6,14 @@ public class HandBaggage {
 
     private Passenger passenger = null;
     private Tray tray;
-    private char[][] content = new char[1000][50];
+    private char[][] content;
     private Layer[] layers = new Layer[5];
 
     public HandBaggage(){
         for(int i = 0; i < layers.length; i++){
             layers[i] = new Layer();
         }
+        content = new char[1000][50];
     }
 
     public Layer[] getLayers() {
@@ -33,5 +34,9 @@ public class HandBaggage {
 
     public Tray getTray() {
         return tray;
+    }
+
+    public char[][] getContent() {
+        return content;
     }
 }

@@ -4,8 +4,8 @@ import main.FederalPoliceOffice.ScanResult;
 
 public class Result {
 
-    ScanResult scanResult;
-    String position;
+    private ScanResult scanResult;
+    private String position;
 
     public Result(ScanResult scanResult, String position){
         this.scanResult = scanResult;

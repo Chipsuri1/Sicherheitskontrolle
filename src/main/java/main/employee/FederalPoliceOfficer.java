@@ -1,8 +1,6 @@
 package main.employee;
 
 import main.FederalPoliceOffice.FederalPoliceOffice;
-import main.MagnetStripe;
-import main.ProfilType;
 import main.baggageScanner.Tray;
 import main.button.RemoteControl;
 import main.passenger.HandBaggage;
@@ -12,7 +10,7 @@ import main.passenger.Passenger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.Type.external;
+import static main.employee.Type.external;
 
 public class FederalPoliceOfficer extends Employee {
 
