@@ -39,4 +39,6 @@ public class HandBaggage {
     public char[][] getContent() {
         return content;
     }
+
+
 }

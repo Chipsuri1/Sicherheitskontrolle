@@ -30,5 +30,9 @@ public class Robot {
                 number++;
             }
         }
+        for (Layer layer : handBaggage.getLayers()
+             ) {
+            layer.setContent(new char[Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER]);
+        }
     }
 }

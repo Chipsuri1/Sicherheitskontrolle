@@ -24,4 +24,7 @@ public class Layer {
         return content;
     }
 
+    public void setContent(char[] content) {
+        this.content = content;
+    }
 }

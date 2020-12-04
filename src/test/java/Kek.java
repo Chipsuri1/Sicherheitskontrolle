@@ -35,8 +35,6 @@ public class Kek {
     }
 
 
-
-
     @TestFactory
     public Stream<DynamicTest> dynamicTestsExampleName() {
         setUpPassengers();
@@ -63,7 +61,6 @@ public class Kek {
     @TestFactory
     Stream<DynamicTest> dynamicTestsBaggage() {
         setUpPassengers();
-        int size = passengers.size();
         int baggageCounter = 0;
         int personCounter = 0;
         List<DynamicTest> dynamicTestHandBaggagesList = new ArrayList<>();
@@ -73,7 +70,7 @@ public class Kek {
                 baggageCounter++;
             }
         }
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             Passenger passengerX = passengers.poll();
             Passenger passengerY = securityControl.getPassengerList().poll();
 
@@ -86,24 +83,24 @@ public class Kek {
                 boolean foundW = true;
                 for (int j = 0; j < handBaggagesX.length; j++) {
                     for (int k = 0; k < 5; k++) {
-                        for (int l = 0; l < 10000; l++) {
+                        for (int l = 0; l < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; l++) {
                             if (handBaggagesX[j].getLayers()[k].getContent()[l] == 'K') {
                                 foundK = false;
-                                for (int m = 0; m < 10000; m++) {
+                                for (int m = 0; m < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; m++) {
                                     if (handBaggagesY[j].getLayers()[k].getContent()[m] == 'K') {
                                         foundK = true;
                                     }
                                 }
                             } else if (handBaggagesX[j].getLayers()[k].getContent()[l] == 'E') {
                                 foundE = false;
-                                for (int m = 0; m < 10000; m++) {
+                                for (int m = 0; m < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; m++) {
                                     if (handBaggagesY[j].getLayers()[k].getContent()[m] == 'E') {
                                         foundE = true;
                                     }
                                 }
                             } else if (handBaggagesX[j].getLayers()[k].getContent()[l] == 'W') {
                                 foundW = false;
-                                for (int m = 0; m < 10000; m++) {
+                                for (int m = 0; m < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; m++) {
                                     if (handBaggagesY[j].getLayers()[k].getContent()[m] == 'W') {
                                         foundW = true;
                                     }
@@ -119,8 +116,8 @@ public class Kek {
             });
             dynamicTestHandBaggagesList.add(dynamicTestForHandBaggages);
         }
-        Assert.assertEquals(568, personCounter);
-        Assert.assertEquals(609, baggageCounter);
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_PASSENGERS, personCounter);
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, baggageCounter);
         return dynamicTestHandBaggagesList.stream();
     }
 
@@ -136,7 +133,7 @@ public class Kek {
                 counter++;
             }
         }
-        Assert.assertEquals(609, counter);
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, counter);
         List<DynamicTest> dynamicTestRecordList = new ArrayList<>();
         for (HandBaggage handBaggage : handBaggages) {
             DynamicTest dynamicTestForRecords = dynamicTest("dynamic test for Records(" + handBaggage.getTray().getRecord() + ")", () -> {
@@ -151,11 +148,11 @@ public class Kek {
     @Order(11)
     public void checkNoIllegalItem() {
         securityControl.checkPassengers();
-        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
         for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
             boolean foundIllegal = false;
             for (Layer layer : tray.getHandBaggage().getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'K' || layer.getContent()[i] == 'W' || layer.getContent()[i] == 'E') {
                         foundIllegal = true;
                     }
@@ -171,7 +168,7 @@ public class Kek {
         int knifeCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
             for (Layer layer : handBaggage.getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'K') {
                         knifeCtr++;
                     }
@@ -183,7 +180,7 @@ public class Kek {
         knifeCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
             for (Layer layer : handBaggage.getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'K') {
                         knifeCtr++;
                     }
@@ -192,11 +189,11 @@ public class Kek {
         }
         Assert.assertEquals(0, knifeCtr);
 
-        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
         for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
             boolean foundIllegal = false;
             for (Layer layer : tray.getHandBaggage().getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'K' || layer.getContent()[i] == 'W' || layer.getContent()[i] == 'E') {
                         foundIllegal = true;
                     }
@@ -209,13 +206,10 @@ public class Kek {
     @Test
     @Order(13)
     public void checkWeapon() {
-        System.gc();
-
-        securityControl = new SecurityControl();
         int weaponCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
             for (Layer layer : handBaggage.getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'W') {
                         weaponCtr++;
                     }
@@ -227,7 +221,7 @@ public class Kek {
         weaponCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
             for (Layer layer : handBaggage.getLayers()) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
                     if (layer.getContent()[i] == 'W') {
                         weaponCtr++;
                     }
@@ -238,7 +232,7 @@ public class Kek {
 
         Assert.assertEquals(4, securityControl.getBaggageScanner().getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().size());
 
-        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
 
     }
 
@@ -246,7 +240,37 @@ public class Kek {
     @Test
     @Order(14)
     public void checkExplosive() {
+        int explosiveCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
+                    if (layer.getContent()[i] == 'E') {
+                        explosiveCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(2, explosiveCtr);
+        securityControl.checkPassengers();
+        explosiveCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; i++) {
+                    if (layer.getContent()[i] == 'E') {
+                        explosiveCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(0, explosiveCtr);
 
+        int destroyedBaggagesCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            if (String.valueOf(handBaggage.getContent()[0][0]).matches("\\w")) {
+                destroyedBaggagesCtr++;
+            }
+        }
+        Assert.assertEquals(2, destroyedBaggagesCtr);
 
     }
 }
