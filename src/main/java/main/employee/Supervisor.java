@@ -1,11 +1,8 @@
 package main.employee;
 
-import main.MagnetStripe;
-import main.ProfilType;
-import main.Status;
-import main.baggageScanner.BaggageScanner;
+import main.baggageScanner.components.BaggageScanner;
 
-import static main.Type.staff;
+import static main.employee.Type.staff;
 
 public class Supervisor extends Employee {
 

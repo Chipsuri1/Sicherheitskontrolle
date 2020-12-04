@@ -1,5 +1,6 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
 
+import main.baggageScanner.Tray;
 import main.employee.Inspector;
 
 import java.util.LinkedList;

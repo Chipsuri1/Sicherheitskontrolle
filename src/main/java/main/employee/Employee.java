@@ -1,6 +1,5 @@
 package main.employee;
 
-import main.IDCard;
 import main.button.Button;
 
 public abstract class Employee {

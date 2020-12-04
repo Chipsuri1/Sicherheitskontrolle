@@ -1,4 +1,6 @@
-package main;
+package main.baggageScanner;
+
+import main.FederalPoliceOffice.Result;
 
 import java.sql.Timestamp;
 import java.util.UUID;

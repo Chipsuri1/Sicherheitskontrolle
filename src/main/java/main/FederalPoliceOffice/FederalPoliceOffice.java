@@ -1,6 +1,6 @@
 package main.FederalPoliceOffice;
 
-import main.baggageScanner.BaggageScanner;
+import main.baggageScanner.components.BaggageScanner;
 import main.employee.FederalPoliceOfficer;
 
 import java.util.LinkedList;

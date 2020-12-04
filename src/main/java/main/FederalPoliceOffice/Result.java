@@ -1,4 +1,6 @@
-package main;
+package main.FederalPoliceOffice;
+
+import main.FederalPoliceOffice.ScanResult;
 
 public class Result {
 

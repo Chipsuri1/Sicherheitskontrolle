@@ -1,17 +1,17 @@
 package main.employee;
 
-import main.Record;
-import main.*;
-import main.baggageScanner.BaggageScanner;
+import main.FederalPoliceOffice.ExplosiveTraceDetector;
+import main.FederalPoliceOffice.TestStripe;
+import main.baggageScanner.Record;
+import main.baggageScanner.components.BaggageScanner;
+import main.baggageScanner.Status;
 import main.baggageScanner.Tray;
-import main.button.Button;
 import main.passenger.HandBaggage;
 import main.passenger.Layer;
-import main.passenger.Passenger;
 
 import java.util.Queue;
 
-import static main.Type.staff;
+import static main.employee.Type.staff;
 
 public class Inspector extends Employee {
 

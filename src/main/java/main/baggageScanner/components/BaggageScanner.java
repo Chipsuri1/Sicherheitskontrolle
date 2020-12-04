@@ -1,15 +1,15 @@
-package main.baggageScanner;
+package main.baggageScanner.components;
 
 import main.FederalPoliceOffice.FederalPoliceOffice;
-import main.Record;
-import main.ScanResult;
-import main.Status;
+import main.FederalPoliceOffice.ScanResult;
+import main.baggageScanner.*;
+import main.baggageScanner.Record;
 import main.employee.Employee;
 import main.employee.HouseKeeper;
 import main.employee.Supervisor;
 import main.employee.Technician;
 
-import static main.Status.*;
+import static main.baggageScanner.Status.*;
 
 public class BaggageScanner {
 
