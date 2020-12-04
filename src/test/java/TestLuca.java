@@ -122,6 +122,10 @@ public class TestLuca {
         Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonRectangle()));
         Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonRight()));
         Assertions.assertFalse(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getOperatingStation().getButtonLeft()));
+
+        baggageScanner.getManualPostControl().setTray(new Tray(new HandBaggage()));
+        Assertions.assertTrue(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO2().push(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1().getRemoteControl()));
+        Assertions.assertFalse(baggageScanner.getOperatingStation().getInspectorI2().push(baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1().getRemoteControl()));
     }
 
     @Test
