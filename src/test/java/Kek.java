@@ -1,11 +1,13 @@
+import main.Record;
+import main.Status;
+import main.baggageScanner.Tray;
 import main.configuration.Configuration;
 import main.configuration.SecurityControl;
 import main.passenger.HandBaggage;
+import main.passenger.Layer;
 import main.passenger.Passenger;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -34,6 +36,9 @@ public class Kek {
         }
     }
 
+
+
+
     @TestFactory
     public Stream<DynamicTest> dynamicTestsExampleName() {
         setUpPassengers();
@@ -56,6 +61,7 @@ public class Kek {
         return dynamicTestNameList.stream();
     }
 
+    @Order(1)
     @TestFactory
     Stream<DynamicTest> dynamicTestsBaggage() {
         setUpPassengers();
@@ -120,27 +126,128 @@ public class Kek {
         return dynamicTestHandBaggagesList.stream();
     }
 
+    @Order(10)
     @TestFactory
     public Stream<DynamicTest> dynamicTestsRecord() {
-        //TODO fix mal das auskommentierte
         //ich teste jetzt hier obs 609 (das geht grad nicht, kp warum)records gibt als Zahl und prüfe nochmal jeden ab, ob zu jedem baggage/tray ein Record existiert
         securityControl.checkPassengers();
         List<HandBaggage> handBaggages = securityControl.getHandBaggage();
-//        int counter = 0;
-//        for (HandBaggage handBaggage : handBaggages) {
-//            if(handBaggage.getTray().getRecord() != null){
-//                counter++;
-//            }
-//        }
-//        Assert.assertEquals(609, counter);
+        int counter = 0;
+        for (HandBaggage handBaggage : handBaggages) {
+            if (handBaggage.getTray().getRecord() != null) {
+                counter++;
+            }
+        }
+        Assert.assertEquals(609, counter);
         List<DynamicTest> dynamicTestRecordList = new ArrayList<>();
         for (HandBaggage handBaggage : handBaggages) {
             DynamicTest dynamicTestForRecords = dynamicTest("dynamic test for Records(" + handBaggage.getTray().getRecord() + ")", () -> {
-//                Assert.assertNotNull(handBaggage.getTray().getRecord());
+                Assert.assertNotNull(handBaggage.getTray().getRecord());
             });
             dynamicTestRecordList.add(dynamicTestForRecords);
         }
         return dynamicTestRecordList.stream();
     }
 
+    @Test
+    @Order(11)
+    public void checkNoIllegalItem() {
+        securityControl.checkPassengers();
+        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
+            boolean foundIllegal = false;
+            for (Layer layer : tray.getHandBaggage().getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'K' || layer.getContent()[i] == 'W' || layer.getContent()[i] == 'E') {
+                        foundIllegal = true;
+                    }
+                }
+            }
+            Assert.assertFalse(foundIllegal);
+        }
+    }
+
+    @Test
+    @Order(12)
+    public void checkKnife() {
+        int knifeCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'K') {
+                        knifeCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(4, knifeCtr);
+        securityControl.checkPassengers();
+        knifeCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'K') {
+                        knifeCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(0, knifeCtr);
+
+        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
+            boolean foundIllegal = false;
+            for (Layer layer : tray.getHandBaggage().getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'K' || layer.getContent()[i] == 'W' || layer.getContent()[i] == 'E') {
+                        foundIllegal = true;
+                    }
+                }
+            }
+            Assert.assertFalse(foundIllegal);
+        }
+    }
+
+    @Test
+    @Order(13)
+    public void checkWeapon() {
+        setUpPassengers();
+        securityControl = new SecurityControl();
+        int weaponCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'W') {
+                        weaponCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(3, weaponCtr);
+        securityControl.checkPassengers();
+        weaponCtr = 0;
+        for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
+            for (Layer layer : handBaggage.getLayers()) {
+                for (int i = 0; i < 10000; i++) {
+                    if (layer.getContent()[i] == 'W') {
+                        weaponCtr++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals(0, weaponCtr);
+
+        Assert.assertEquals(4, securityControl.getBaggageScanner().getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().size());
+
+        Assert.assertEquals(605, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+
+    }
+
+
+    @Test
+    @Order(14)
+    public void checkExplosive() {
+
+
+    }
 }

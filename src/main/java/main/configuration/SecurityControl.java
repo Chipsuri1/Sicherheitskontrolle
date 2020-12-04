@@ -5,10 +5,7 @@ import main.baggageScanner.Tray;
 import main.passenger.HandBaggage;
 import main.passenger.Passenger;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 
 public class SecurityControl {
@@ -18,17 +15,17 @@ public class SecurityControl {
     private BaggageScanner baggageScanner = new BaggageScanner();
 
 
-    public SecurityControl(){
+    public SecurityControl() {
         initPassengers();
     }
 
-    public void checkPassengers(){
+    public void checkPassengers() {
         baggageScanner.getOperatingStation().getCardReader().checkCard(baggageScanner.getOperatingStation().getInspectorI2().swipeCard(), "5000");
-        for(int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++){
+        for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             Passenger passenger = passengerList.poll();
+
 //            System.out.println("It´s "+ passenger.getName()+" turn, handbaggages are put into trays!");
-            for(int j = 0; j < passenger.getHandBaggage().length; j++){
-                handBaggage.add(passenger.getHandBaggage()[j]);
+            for (int j = 0; j < passenger.getHandBaggage().length; j++) {
                 Tray tray = new Tray((passenger.getHandBaggage()[j]));
                 passenger.getHandBaggage()[j].setTray(tray);
                 baggageScanner.getRollerConveyor().getTrays().add(tray);
@@ -44,13 +41,15 @@ public class SecurityControl {
     }
 
 
-    private void initPassengers(){
-        for(int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++){
+    private void initPassengers() {
+        for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             String[] content = Configuration.instance.fileReader.readContent(i, Configuration.instance.DATA_FILEPATH);
 
             String name = content[0];
             HandBaggage[] handBaggage = Configuration.instance.dataGenerator.generateBaggage(Integer.valueOf(content[1]), content[2]);
             Passenger passenger = new Passenger(name, handBaggage);
+            List<HandBaggage> handBaggageList = Arrays.asList(passenger.getHandBaggage());
+            this.handBaggage.addAll(handBaggageList);
             Arrays.stream(handBaggage).forEach(handBaggage1 -> handBaggage1.setPassenger(passenger));
             passengerList.offer(passenger);
         }

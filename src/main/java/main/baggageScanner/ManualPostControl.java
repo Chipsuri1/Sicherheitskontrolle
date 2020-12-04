@@ -8,6 +8,10 @@ import main.employee.Supervisor;
 import main.passenger.HandBaggage;
 import main.passenger.Passenger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 public class ManualPostControl {
 
     private Inspector inspectorI3 = new Inspector(3, "Bruce Willis", "19.03.1955", true);
@@ -65,18 +69,30 @@ public class ManualPostControl {
                 officer2InPresence.push(officer2InPresence.getRemoteControl());
 //
 //                officer2InPresence.workWithRobot(tray.getHandBaggage());
-            } else if (record.getResult().getScanResult().equals(ScanResult.weapon)){
+            } else if (record.getResult().getScanResult().equals(ScanResult.weapon)) {
                 //weapon
                 System.out.println("weapon");
                 passengerInPresence = tray.getHandBaggage().getPassenger();
                 supervisorInPresence = baggageScanner.getSupervision().getSupervisor();
                 officer1InPresence.openHandBaggageGetWeaponAndGiveToOfficer03(tray);
-                //TODO ich glaube hier gibt er dem officer nicht alle Handbaggages
-                //TODO i dont think so
-                HandBaggage handBaggage = tray.getHandBaggage();
-//                    for (HandBaggage handBaggage : tray.getHandBaggage()) {
-                officer1InPresence.getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().add(handBaggage);
-//                    }
+
+
+                ArrayList<HandBaggage> handBaggageOfPassenger = new ArrayList<>();
+                handBaggageOfPassenger.add(tray.getHandBaggage());
+                for (Tray tray : baggageScanner.getTrack2().getTrays()) {
+                    if (tray.getHandBaggage().getPassenger().equals(passengerInPresence)) {
+                        handBaggageOfPassenger.add(tray.getHandBaggage());
+                        baggageScanner.getTrack2().getTrays().remove(tray);
+//                        break;
+                    }
+                }
+                for (Tray tray : baggageScanner.getScanner().getTrays()){
+                    if(tray.getHandBaggage().getPassenger().equals(passengerInPresence)){
+                        baggageScanner.doNextStepAfterScanning(tray);
+                    }
+                }
+                officer1InPresence.getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().addAll(handBaggageOfPassenger);
+
                 officer1InPresence.getFederalPoliceOffice().getFederalPoliceOfficerO3().setPassenger(passengerInPresence);
                 officer2InPresence = null;
                 officer3InPresence = null;

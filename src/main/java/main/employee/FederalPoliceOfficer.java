@@ -1,12 +1,10 @@
 package main.employee;
 
 import main.FederalPoliceOffice.FederalPoliceOffice;
-import main.FederalPoliceOffice.Robot;
 import main.MagnetStripe;
 import main.ProfilType;
 import main.baggageScanner.Tray;
 import main.button.RemoteControl;
-import main.configuration.Configuration;
 import main.passenger.HandBaggage;
 import main.passenger.Layer;
 import main.passenger.Passenger;
@@ -19,7 +17,7 @@ import static main.Type.external;
 public class FederalPoliceOfficer extends Employee {
 
     private FederalPoliceOffice federalPoliceOffice;
-    private char thing;
+    private ArrayList<Character> things;
     private List<HandBaggage> baggagesOfArrested;
     private Passenger passenger;
     private RemoteControl remoteControl;
@@ -33,6 +31,7 @@ public class FederalPoliceOfficer extends Employee {
         getIdCard().setType(external);
         getIdCard().setMagnetStripe(new MagnetStripe(ProfilType.O, getIdCard().getSecretKey()));
         baggagesOfArrested = new ArrayList<>();
+        things = new ArrayList<>();
     }
 
 
@@ -44,7 +43,7 @@ public class FederalPoliceOfficer extends Employee {
         for (Layer layer : tray.getHandBaggage().getLayers()) {
             for (int i = 0; i < layer.getContent().length; i++) {
                 if (layer.getContent()[i] == 'W'){
-                    federalPoliceOffice.getFederalPoliceOfficerO3().setThing(layer.getContent()[i]);
+                    federalPoliceOffice.getFederalPoliceOfficerO3().addThing(layer.getContent()[i]);
                     layer.getContent()[i] = 'A';
                 }
             }
@@ -52,8 +51,8 @@ public class FederalPoliceOfficer extends Employee {
 
     }
 
-    public void setThing(char thing) {
-        this.thing = thing;
+    public void addThing(char thing) {
+        this.things.add(thing);
     }
 
     public List<HandBaggage> getBaggagesOfArrested() {

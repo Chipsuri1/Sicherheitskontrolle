@@ -1,5 +1,7 @@
 package main;
 
+import main.passenger.HandBaggage;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -8,11 +10,13 @@ public class Record {
     private UUID id;
     private Timestamp timeStamp;
     private Result result;
+    private HandBaggage handBaggage;
 
-    public Record(Result result){
+    public Record(Result result, HandBaggage handBaggage){
         this.result = result;
         this.id = UUID.randomUUID();
         this.timeStamp = new Timestamp(System.currentTimeMillis());
+        this.handBaggage = handBaggage;
     }
 
        public Result getResult() {
@@ -25,5 +29,9 @@ public class Record {
 
     public Timestamp getTimeStamp() {
         return timeStamp;
+    }
+
+    public HandBaggage getHandBaggage() {
+        return handBaggage;
     }
 }

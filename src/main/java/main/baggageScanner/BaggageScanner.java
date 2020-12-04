@@ -50,7 +50,7 @@ public class BaggageScanner {
 
     }
 
-    private void doNextStepAfterScanning(Tray tray) {
+    public void doNextStepAfterScanning(Tray tray) {
         Record record = tray.getRecord();
 
         if (record.getResult().getScanResult().equals(ScanResult.knife) || record.getResult().getScanResult().equals(ScanResult.weapon) || record.getResult().getScanResult().equals(ScanResult.explosive)) {

@@ -49,7 +49,7 @@ public class Scanner {
 
 
                 if(position.equals("clean")){
-                    record = new Record(new Result(ScanResult.clean, position));
+                    record = new Record(new Result(ScanResult.clean, position), tray.getHandBaggage());
                 }else{
                     ScanResult scanResult = null;
                     String result = null;
@@ -69,7 +69,7 @@ public class Scanner {
                     }
                     String string = "prohibited item | " + result + " detected at position " + position;
                     System.out.println(string);
-                    record = new Record(new Result(scanResult, string));
+                    record = new Record(new Result(scanResult, string), tray.getHandBaggage());
                     break;
                 }
 
