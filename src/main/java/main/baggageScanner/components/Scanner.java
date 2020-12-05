@@ -67,6 +67,7 @@ public class Scanner {
                         case "E":
                             scanResult = ScanResult.explosive;
                             result = "explosive";
+                            break;
                     }
                     String string = "prohibited item | " + result + " detected at position " + position;
                     System.out.println(string);
