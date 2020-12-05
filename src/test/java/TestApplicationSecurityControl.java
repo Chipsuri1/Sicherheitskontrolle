@@ -431,7 +431,5 @@ public class TestApplicationSecurityControl {
             }
         }
         Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGES_WITH_EXPLOSIVES, destroyedBaggagesCtr);
-
     }
-
 }

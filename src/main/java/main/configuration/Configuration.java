@@ -9,8 +9,8 @@ public enum Configuration {
     public final int NUMBER_OF_BAGGAGE = 609;
     public final int NUMBER_OF_CONTENT_PER_LAYER = 10000;
     public final int NUMBER_OF_BAGGAGES_WITH_KNIFE = 4;
-    public final int NUMBER_OF_BAGGAGES_WITH_WEAPONS = 3;
-    public final int NUMBER_OF_BAGGAGES_WITH_EXPLOSIVES = 2;
+    public final int NUMBER_OF_BAGGAGES_WITH_WEAPONS = 4;
+    public final int NUMBER_OF_BAGGAGES_WITH_EXPLOSIVES = 3;
 
     public final MersenneTwister mersenneTwister = new MersenneTwister();
     public final DataGenerator dataGenerator = new DataGenerator();
