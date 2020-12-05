@@ -94,8 +94,6 @@ public class ManualPostControl {
                 }
                 for (Tray tray : baggageScanner.getScanner().getTrays()){
                     if(tray.getHandBaggage().getPassenger().equals(passengerInPresence)){
-
-//                        tray.setRecord(new Record(new Result(ScanResult.explosive, "0"), tray.getHandBaggage()));
                         getInspectorI3().putTrayToBelt(tray, baggageScanner);
                         baggageScanner.scanHandBaggage();
                         baggageScanner.getScanner().getTrays().remove(tray);
