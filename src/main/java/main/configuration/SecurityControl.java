@@ -33,6 +33,7 @@ public class SecurityControl {
             baggageScanner.scanHandBaggage();
 
         }
+        System.out.println("Size " + baggageScanner.getTrack2().getTrays().size());
         baggageScanner.getTechnician().maintenance();
 
     }

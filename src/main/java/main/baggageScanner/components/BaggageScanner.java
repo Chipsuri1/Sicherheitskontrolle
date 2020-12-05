@@ -58,7 +58,10 @@ public class BaggageScanner {
             manualPostControl.setTray(tray);
             manualPostControl.makeManuelPostControll(this);
 
-        } else {
+        } else if(federalPoliceOffice.getPrison().contains(tray.getHandBaggage().getPassenger())){
+            federalPoliceOffice.getFederalPoliceOfficerO3().getBaggagesOfArrested().add(tray.getHandBaggage());
+        }
+            else{
 //            System.out.println("Passenger "+ tray.getHandBaggage().getPassenger().getName()+ " is crispy clean!");
             //Gib Passagier Handbaggage zurück über Track 02
             track2.putTray(tray);
