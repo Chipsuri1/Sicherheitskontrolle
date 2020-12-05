@@ -8,7 +8,6 @@ import main.employee.*;
 import main.passenger.HandBaggage;
 import main.passenger.Layer;
 import main.passenger.Passenger;
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 
 import java.util.*;
@@ -16,7 +15,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-public class AllTests {
+public class TestApplicationSecurityControl {
 
     private SecurityControl securityControl;
     private BaggageScanner baggageScanner;
@@ -61,7 +60,7 @@ public class AllTests {
             String nameX = passengerX.getName();
             String nameY = passengerY.getName();
             DynamicTest dynamicTestForNames = dynamicTest("dynamic test for setName(" + nameX + "," + nameY + ")", () -> {
-                Assert.assertEquals(nameX, nameY);
+                Assertions.assertEquals(nameX, nameY);
             });
 
             dynamicTestNameList.add(dynamicTestForNames);
@@ -104,6 +103,7 @@ public class AllTests {
                                         foundK = true;
                                     }
                                 }
+
                             } else if (handBaggagesX[j].getLayers()[k].getContent()[l] == 'E') {
                                 foundE = false;
                                 for (int m = 0; m < Configuration.instance.NUMBER_OF_CONTENT_PER_LAYER; m++) {
@@ -123,14 +123,14 @@ public class AllTests {
 
                     }
                 }
-                Assert.assertTrue(foundK);
-                Assert.assertTrue(foundW);
-                Assert.assertTrue(foundE);
+                Assertions.assertTrue(foundK);
+                Assertions.assertTrue(foundW);
+                Assertions.assertTrue(foundE);
             });
             dynamicTestHandBaggagesList.add(dynamicTestForHandBaggages);
         }
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_PASSENGERS, personCounter);
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, baggageCounter);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_PASSENGERS, personCounter);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, baggageCounter);
         return dynamicTestHandBaggagesList.stream();
     }
 
@@ -284,20 +284,19 @@ public class AllTests {
     @Order(10)
     @TestFactory
     public Stream<DynamicTest> dynamicTestsRecord() {
-        //ich teste jetzt hier obs 609 (das geht grad nicht, kp warum)records gibt als Zahl und prüfe nochmal jeden ab, ob zu jedem baggage/tray ein Record existiert
         securityControl.checkPassengers();
         List<HandBaggage> handBaggages = securityControl.getHandBaggage();
-        int counter = 0;
+        int recordCounter = 0;
         for (HandBaggage handBaggage : handBaggages) {
             if (handBaggage.getTray().getRecord() != null) {
-                counter++;
+                recordCounter++;
             }
         }
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, counter);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE, recordCounter);
         List<DynamicTest> dynamicTestRecordList = new ArrayList<>();
         for (HandBaggage handBaggage : handBaggages) {
             DynamicTest dynamicTestForRecords = dynamicTest("dynamic test for Records(" + handBaggage.getTray().getRecord() + ")", () -> {
-                Assert.assertNotNull(handBaggage.getTray().getRecord());
+                Assertions.assertNotNull(handBaggage.getTray().getRecord());
             });
             dynamicTestRecordList.add(dynamicTestForRecords);
         }
@@ -308,7 +307,7 @@ public class AllTests {
     @Order(11)
     public void checkNoIllegalItem() {
         securityControl.checkPassengers();
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE - 4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
         for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
             boolean foundIllegal = false;
             for (Layer layer : tray.getHandBaggage().getLayers()) {
@@ -317,8 +316,8 @@ public class AllTests {
                         foundIllegal = true;
                     }
                 }
-                Assert.assertFalse(foundIllegal);
             }
+            Assertions.assertFalse(foundIllegal);
         }
     }
 
@@ -335,7 +334,7 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(4, knifeCtr);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGES_WITH_KNIFE, knifeCtr);
         securityControl.checkPassengers();
         knifeCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
@@ -347,9 +346,9 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(0, knifeCtr);
+        Assertions.assertEquals(0, knifeCtr);
 
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE - 4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
         for (Tray tray : securityControl.getBaggageScanner().getTrack2().getTrays()) {
             boolean foundIllegal = false;
             for (Layer layer : tray.getHandBaggage().getLayers()) {
@@ -359,7 +358,7 @@ public class AllTests {
                     }
                 }
             }
-            Assert.assertFalse(foundIllegal);
+            Assertions.assertFalse(foundIllegal);
         }
     }
 
@@ -376,7 +375,7 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(3, weaponCtr);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGES_WITH_WEAPONS, weaponCtr);
         securityControl.checkPassengers();
         weaponCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
@@ -388,11 +387,11 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(0, weaponCtr);
+        Assertions.assertEquals(0, weaponCtr);
 
-        Assert.assertEquals(4, securityControl.getBaggageScanner().getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().size());
+        Assertions.assertEquals(4, securityControl.getBaggageScanner().getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().size());
 
-        Assert.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE-4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE - 4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
 
     }
 
@@ -410,7 +409,7 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(2, explosiveCtr);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGES_WITH_EXPLOSIVES, explosiveCtr);
         securityControl.checkPassengers();
         explosiveCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
@@ -422,7 +421,7 @@ public class AllTests {
                 }
             }
         }
-        Assert.assertEquals(0, explosiveCtr);
+        Assertions.assertEquals(0, explosiveCtr);
 
         int destroyedBaggagesCtr = 0;
         for (HandBaggage handBaggage : securityControl.getHandBaggage()) {
@@ -430,7 +429,7 @@ public class AllTests {
                 destroyedBaggagesCtr++;
             }
         }
-        Assert.assertEquals(2, destroyedBaggagesCtr);
+        Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGES_WITH_EXPLOSIVES, destroyedBaggagesCtr);
 
     }
 
