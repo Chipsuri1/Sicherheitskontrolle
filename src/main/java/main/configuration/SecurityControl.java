@@ -24,6 +24,7 @@ public class SecurityControl {
         for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             Passenger passenger = passengerList.poll();
 
+
 //            System.out.println("It´s "+ passenger.getName()+" turn, handbaggages are put into trays!");
             for (int j = 0; j < passenger.getHandBaggage().length; j++) {
                 Tray tray = new Tray((passenger.getHandBaggage()[j]));
@@ -37,13 +38,20 @@ public class SecurityControl {
 
         }
         baggageScanner.getTechnician().maintenance();
-
+        System.out.printf("Size: " + getBaggageScanner().getTrack2().getTrays().size());
     }
 
 
     private void initPassengers() {
         for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             String[] content = Configuration.instance.fileReader.readContent(i, Configuration.instance.DATA_FILEPATH);
+//            if (i == 149) {
+//                System.out.println();
+//            }
+
+            if (content.length == 4) {
+                content[2] += ";" + content[3];
+            }
 
             String name = content[0];
             HandBaggage[] handBaggage = Configuration.instance.dataGenerator.generateBaggage(Integer.valueOf(content[1]), content[2]);
