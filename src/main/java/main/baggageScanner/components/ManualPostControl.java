@@ -1,6 +1,7 @@
 package main.baggageScanner.components;
 
 import main.FederalPoliceOffice.ExplosiveTraceDetector;
+import main.FederalPoliceOffice.Result;
 import main.FederalPoliceOffice.ScanResult;
 import main.FederalPoliceOffice.TestStripe;
 import main.baggageScanner.Record;
@@ -60,6 +61,7 @@ public class ManualPostControl {
             System.out.println("weapon or eplosive");
             baggageScanner.getOperatingStation().getInspectorI2().setAlarm(baggageScanner);
             baggageScanner.getFederalPoliceOffice().getFederalPoliceOfficerO1().arrest(tray.getHandBaggage().getPassenger());
+            tray.getHandBaggage().getPassenger().setArrested(true);
             FederalPoliceOfficer officer1InPresence = baggageScanner.getFederalPoliceOffice().reqestOfficer1(baggageScanner);
             FederalPoliceOfficer officer2InPresence = baggageScanner.getFederalPoliceOffice().reqestOfficer2(baggageScanner);
             FederalPoliceOfficer officer3InPresence = baggageScanner.getFederalPoliceOffice().reqestOfficer3(baggageScanner);
@@ -92,7 +94,11 @@ public class ManualPostControl {
                 }
                 for (Tray tray : baggageScanner.getScanner().getTrays()){
                     if(tray.getHandBaggage().getPassenger().equals(passengerInPresence)){
-                        baggageScanner.doNextStepAfterScanning(tray);
+
+//                        tray.setRecord(new Record(new Result(ScanResult.explosive, "0"), tray.getHandBaggage()));
+                        getInspectorI3().putTrayToBelt(tray, baggageScanner);
+                        baggageScanner.scanHandBaggage();
+                        baggageScanner.getScanner().getTrays().remove(tray);
                     }
                 }
                 officer1InPresence.getFederalPoliceOffice().getFederalPoliceOfficerO3().getBaggagesOfArrested().addAll(handBaggageOfPassenger);
