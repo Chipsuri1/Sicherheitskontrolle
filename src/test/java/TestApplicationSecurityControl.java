@@ -393,6 +393,7 @@ public class TestApplicationSecurityControl {
 
         Assertions.assertEquals(Configuration.instance.NUMBER_OF_BAGGAGE - 4, securityControl.getBaggageScanner().getTrack2().getTrays().size());
 
+        Assertions.assertEquals(5, baggageScanner.getFederalPoliceOffice().getPrison().size());
     }
 
 

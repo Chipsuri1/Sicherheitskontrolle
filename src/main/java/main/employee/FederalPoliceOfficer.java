@@ -34,7 +34,9 @@ public class FederalPoliceOfficer extends Employee {
 
 
     public void arrest(Passenger passenger) {
-
+        if(!federalPoliceOffice.getPrison().contains(passenger)) {
+            federalPoliceOffice.getPrison().add(passenger);
+        }
     }
 
     public void openHandBaggageGetWeaponAndGiveToOfficer03(Tray tray) {

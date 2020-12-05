@@ -2,7 +2,9 @@ package main.FederalPoliceOffice;
 
 import main.baggageScanner.components.BaggageScanner;
 import main.employee.FederalPoliceOfficer;
+import main.passenger.Passenger;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class FederalPoliceOffice {
     private FederalPoliceOfficer federalPoliceOfficerO2;
     private FederalPoliceOfficer federalPoliceOfficerO3;
     private List<Robot> robots;
+    private ArrayList<Passenger> prison;
 
     public FederalPoliceOffice(BaggageScanner baggageScanner) {
         this.baggageScanner = baggageScanner;
@@ -20,6 +23,7 @@ public class FederalPoliceOffice {
         federalPoliceOfficerO2 = new FederalPoliceOfficer(8, "Toto", "01.01.1969", this);
         federalPoliceOfficerO3 = new FederalPoliceOfficer(9, "Harry", "01.01.1969", this);
         robots = new LinkedList<>();
+        prison = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             robots.add(new Robot(this));
         }
@@ -54,5 +58,9 @@ public class FederalPoliceOffice {
 
     public BaggageScanner getBaggageScanner() {
         return baggageScanner;
+    }
+
+    public List<Passenger> getPrison() {
+        return prison;
     }
 }
