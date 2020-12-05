@@ -42,9 +42,9 @@ public class SecurityControl {
     private void initPassengers() {
         for (int i = 0; i < Configuration.instance.NUMBER_OF_PASSENGERS; i++) {
             String[] content = Configuration.instance.fileReader.readContent(i, Configuration.instance.DATA_FILEPATH);
-//            if (i == 149) {
-//                System.out.println();
-//            }
+            if (i == 149) {
+                System.out.println();
+            }
 
             if (content.length == 4) {
                 content[2] += ";" + content[3];
